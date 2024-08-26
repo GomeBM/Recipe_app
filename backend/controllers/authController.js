@@ -56,13 +56,19 @@ router.post("/login", async (req, res) => {
       });
     }
 
-    const token = jwt.sign({ name: user.username }, process.env.JWT_SECRET);
+    // Create a JWT
+    const token = jwt.sign(
+      { userId: user._id, email: user.email },
+      process.env.JWT_SECRET,
+      { expiresIn: "1h" } // Token expires in 1 hour
+    );
 
     res.status(200).json({
       success: true,
       message: "Login successful",
       name: user.username,
       email: user.email,
+      token,
     });
   } catch (error) {
     console.log("Server error:", error.message);

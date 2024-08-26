@@ -79,7 +79,7 @@ router.post("/add-recipe", async (req, res) => {
   }
 });
 
-//GET ALL CURRENT USERS MY_RECIPES ARRAY
+//GET CURRENT USERS MY_RECIPES ARRAY
 router.get("/my-recipes", async (req, res) => {
   const { userEmail } = req.body;
   try {
@@ -95,6 +95,29 @@ router.get("/my-recipes", async (req, res) => {
       message: "Here are your recipes",
       my_recipes_ammount: user.my_recipes.length,
       my_recipes: user.my_recipes,
+    });
+  } catch (error) {
+    console.error("Error fetching recipes:", error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+//GET CURRENT USERS FAV_RECIPES ARRAY
+router.get("/my-fav-recipes", async (req, res) => {
+  const { userEmail } = req.body;
+  try {
+    const user = await userModel
+      .findOne({ email: userEmail })
+      .populate("fav_recipes.recipe");
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    res.status(200).json({
+      message: "Here are your recipes",
+      fav_recipes_ammount: user.fav_recipes.length,
+      fav_recipes: user.fav_recipes,
     });
   } catch (error) {
     console.error("Error fetching recipes:", error);
