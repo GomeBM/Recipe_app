@@ -1,0 +1,76 @@
+.carousel-container {
+  width: 100%;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+/* Custom arrows */
+.custom-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.6);
+  border: none;
+  width: 80px;
+  height: 50%;
+  color: white;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  transition: all 0.5s ease; /* Add this line */
+}
+
+.custom-arrow:hover {
+  background: rgba(0, 0, 0, 0.8);
+  transform: translateY(-50%) scale(1.2);
+  border: 3px solid white;
+  height: 70%;
+}
+
+.custom-arrow.left {
+  border-radius: 0 20px 20px 0;
+}
+
+.custom-arrow.left:hover {
+  left: 20px;
+  border-radius: 20px;
+}
+
+.custom-arrow.right {
+  border-radius: 20px 0 0 20px;
+  right: 0;
+}
+
+.custom-arrow.right:hover {
+  right: 20px;
+  border-radius: 20px;
+}
+
+/* Custom dots */
+.react-multi-carousel-dot-list {
+  bottom: -30px;
+}
+
+.custom-dot {
+  background: #c4c4c4;
+  border: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin: 0 5px;
+  padding: 0;
+  cursor: pointer;
+}
+
+.custom-dot.active {
+  background: #869791;
+}
+
+/* Adjust the container to account for the custom dots */
+.react-multi-carousel-list {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}

@@ -2,12 +2,25 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 20px;
 }
 
-.all-recipes-list {
+.all-recipes-header {
+  color: white;
+  background-color: #545353;
+  font-size: 20px;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 20px;
+  align-self: flex-start;
+}
+
+.all-recipes-container {
+  width: 100%;
   display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  background: #403e3e;
+  border-radius: 10px;
   padding: 20px;
-  justify-content: center;
 }
