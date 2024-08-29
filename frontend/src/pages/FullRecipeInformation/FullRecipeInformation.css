@@ -1,40 +1,41 @@
-.home-page-container {
+.full-recipe-page {
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 5%;
 }
 
-.all-recipes-header {
+.full-recipe-container {
+  width: 550px;
+  margin-top: 120px;
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-bottom: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   color: white;
-  background-color: #545353;
-  font-size: 20px;
+  background: #444444;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 15px;
+  padding-right: 15px;
   border-radius: 10px;
-  padding: 10px;
+  transition: all 0.8s ease-in-out;
+}
+
+.full-recipe-image {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.reveal-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
   margin-bottom: 20px;
-  align-self: center;
-}
-
-.all-recipes-container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: #403e3e;
-  border-radius: 10px;
-  padding: 20px;
-  margin-bottom: 100px;
-}
-
-.welcome-header {
-  font-size: 30px;
-  color: white;
-}
-
-.reveal-breakfast-container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
 }
 
 .reveal-button-container {
@@ -50,21 +51,12 @@
   transform: scale(1.08);
 }
 
-/* Targeting all children of reveal-button-container */
 .reveal-button-container * {
   transition: color 0.2s ease;
 }
 
 .reveal-button-container:hover * {
   color: #f99128;
-}
-
-.reveal-lists-container {
-  display: flex;
-  flex-direction: column;
-  height: fit-content;
-  justify-content: center;
-  width: 100%;
 }
 
 .reveal-button {
@@ -80,34 +72,39 @@
   color: #ff8000;
 }
 
-.breakfast-container {
+.recipe-ingredients,
+.recipe-instructions {
   width: 100%;
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.8s ease-in-out, opacity 0.8s ease-in-out;
   opacity: 0;
-  background: #403e3e;
-  border-radius: 10px;
-  margin-bottom: 100px;
 }
 
-.breakfast-container.visible {
+.recipe-ingredients.visible,
+.recipe-instructions.visible {
   max-height: 1000px; /* Adjust this value based on your content's maximum height */
   opacity: 1;
 }
 
-.breakfast-content {
-  padding: 20px;
+.full-recipe-name {
+  font-size: 20px;
+}
+
+.full-recipe-ingredient-list,
+.full-recipe-instructions-list {
+  padding-left: 20px;
+}
+
+.full-recipe-ingredient,
+.full-recipe-instruction {
+  margin-bottom: 10px;
 }
 
 @media screen and (max-width: 830px) {
-  .all-recipes-header {
-    text-align: center;
-  }
-
-  .all-recipes-container,
-  .breakfast-container {
-    margin-bottom: 50px;
-    margin-top: 50px;
+  .full-recipe-container {
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
   }
 }

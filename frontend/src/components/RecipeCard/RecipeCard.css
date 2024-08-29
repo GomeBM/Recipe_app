@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  background-color: orange;
+  background-color: #ff8000;
   border-radius: 15px;
   align-items: center;
   box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.5);
@@ -13,16 +13,36 @@
   transition: all 0.5s ease; /* Add this line */
 }
 
+.recipe-details {
+  border: 5px solid #ff8000;
+  width: 100%;
+  border-radius: 10px;
+  margin-top: 10px;
+  padding: 5px;
+}
+
 .recipe-card-container:hover {
   transform: translateY(-10px) scale(1.05);
   border: 3px solid white;
-  background-color: rgb(249, 181, 55);
+  background-color: #feb95e;
   border-radius: 15px 15px 0 15px;
 }
 
 .recipe-card-text-container {
   padding: 20px;
   color: #403e3e;
+}
+
+.reveal-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  /* margin-bottom: 20px; */
+  border: 5px solid #ff8000;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  padding: 5px;
 }
 
 .recipe-card-name {
@@ -49,18 +69,30 @@
   border-radius: 15px 15px 0 0;
 }
 
-.recipe-card-fav-button {
+.recipe-card-buttons {
+  display: flex;
+  flex-direction: column;
   margin-top: auto;
   margin-bottom: 10px;
+}
+
+.recipe-card-button {
   background: #403e3e;
+  margin: 10px;
   border-radius: 10px;
   height: fit-content;
   padding: 5px;
   color: white;
 }
 
-.recipe-card-fav-button:hover {
+.recipe-card-button:hover {
   background: #303030;
   border: 1px solid white;
   transform: scale(1.1);
+}
+
+@media screen and (max-width: 830px) {
+  .recipe-card-container {
+    margin-left: 30px;
+  }
 }

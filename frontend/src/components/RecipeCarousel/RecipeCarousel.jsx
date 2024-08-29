@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import RecipeCard from "./RecipeCard";
+import RecipeCard from "../RecipeCard/RecipeCard";
 import { GrLinkPrevious, GrLinkNext } from "react-icons/gr";
 import { useMediaQuery } from "react-responsive";
 import "./RecipeCarousel.css";
@@ -22,20 +22,8 @@ const CustomLeftArrow = ({ onClick }) => {
   );
 };
 
-const CustomDot = ({ onClick, index, active }) => {
-  const carouselItems = [1, 2, 3, 4, 5];
-  return (
-    <button
-      className={active ? "custom-dot active" : "custom-dot"}
-      onClick={() => onClick()}
-    >
-      {React.Children.toArray(carouselItems)[index]}
-    </button>
-  );
-};
-
 const RecipeCarousel = ({ recipes }) => {
-  const isMobile = useMediaQuery({ maxWidth: 464 });
+  const isMobile = useMediaQuery({ maxWidth: 600 });
 
   const responsive = {
     superLargeDesktop: {
@@ -44,11 +32,11 @@ const RecipeCarousel = ({ recipes }) => {
     },
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 4,
+      items: 3,
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
-      items: 4,
+      items: 3,
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },

@@ -70,7 +70,7 @@ router.get("/get-all-recipes", async (req, res) => {
 });
 
 //GET ALL RECIPES FROM THE DB BASED ON INGREDIENTS LIST
-router.get("/get-by-ingredients", async (req, res) => {
+router.post("/get-by-ingredients", async (req, res) => {
   const { ingredients } = req.body;
 
   try {
@@ -92,6 +92,26 @@ router.get("/get-by-ingredients", async (req, res) => {
   } catch (error) {
     console.error("Error fetching recipes:", error);
     res.status(500).json({ error: error.message });
+  }
+});
+
+router.post("/get-by-id", async (req, res) => {
+  const { _id } = req.body;
+  try {
+    const recipe = await recipeModel.findOne({ _id }); // Fetch the recipe by _id
+
+    if (!recipe) {
+      console.log(`No recipe found with id of ${_id}`);
+      return res.status(404).json({
+        success: false,
+        message: `No recipe found with id of ${_id}`,
+      });
+    }
+
+    res.status(200).json({ recipe });
+  } catch (error) {
+    console.log("Server error:", error.message);
+    res.status(500).json({ success: false, message: error.message });
   }
 });
 
