@@ -22,7 +22,7 @@ const CustomLeftArrow = ({ onClick }) => {
   );
 };
 
-const RecipeCarousel = ({ recipes }) => {
+const RecipeCarousel = ({ recipes, popUp }) => {
   const isMobile = useMediaQuery({ maxWidth: 600 });
 
   const responsive = {
@@ -59,7 +59,7 @@ const RecipeCarousel = ({ recipes }) => {
           customLeftArrow={<CustomLeftArrow />}
         >
           {recipes.map((recipe, index) => (
-            <RecipeCard key={index} recipe={recipe} />
+            <RecipeCard key={index} recipe={recipe} popUp={popUp} />
           ))}
         </Carousel>
       ) : (

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getUser, logout } from "../../UtilityFunctions";
 import { CiSquarePlus, CiCircleMinus } from "react-icons/ci";
+import Popup from "../../components/Popup/Popup";
 import "./HomePage.css";
 import RecipeCarousel from "../../components/RecipeCarousel/RecipeCarousel";
 
@@ -14,6 +15,12 @@ const Homepage = () => {
   const [breakfastVisible, setBreakfastVisible] = useState(false);
   const [lunchVisible, setLunchVisible] = useState(false);
   const [dinneVisible, setDinnerVisible] = useState(false);
+
+  const [showPopup, setShowPopup] = useState({
+    show: false,
+    message: "",
+    recipeImage: null,
+  });
 
   const setIndividualRecipeLists = (allRecipes) => {
     const breakfast = allRecipes.filter((recipe) =>
@@ -71,14 +78,31 @@ const Homepage = () => {
     };
   }, []);
 
+  const handlePopUp = (recipe) => {
+    setShowPopup({
+      show: true,
+      message: `${recipe.name} has been added to your favourite list`,
+      recipeImage: recipe.image,
+    });
+  };
+
   return (
     <div className="home-page-container">
       {connectedUserName && (
         <h1 className="welcome-header">{`Hello ${connectedUserName}`}</h1>
       )}
+      {showPopup.show && (
+        <Popup
+          message={showPopup.message}
+          recipeImage={showPopup.recipeImage}
+          onClose={() =>
+            setShowPopup({ show: false, message: "", recipeImage: "" })
+          }
+        />
+      )}
       <div className="all-recipes-container">
         <h2 className="all-recipes-header">All of our recipes:</h2>
-        <RecipeCarousel recipes={allRecipes} />
+        <RecipeCarousel recipes={allRecipes} popUp={handlePopUp} />
       </div>
       <div className="reveal-lists-container">
         <div className="reveal-breakfast-container">
@@ -106,7 +130,7 @@ const Homepage = () => {
               <h2 className="all-recipes-header">
                 Great recipes for BREAKFAST:
               </h2>
-              <RecipeCarousel recipes={breakfastRecipes} />
+              <RecipeCarousel recipes={breakfastRecipes} popUp={handlePopUp} />
             </div>
           </div>
         </div>
@@ -130,7 +154,7 @@ const Homepage = () => {
           >
             <div className="breakfast-content">
               <h2 className="all-recipes-header">Great recipes for LUNCH:</h2>
-              <RecipeCarousel recipes={lunchRecipes} />
+              <RecipeCarousel recipes={lunchRecipes} popUp={handlePopUp} />
             </div>
           </div>
         </div>
@@ -140,13 +164,13 @@ const Homepage = () => {
             className="reveal-button-container"
             onClick={() => setDinnerVisible(!dinneVisible)}
           >
-            {!lunchVisible ? (
+            {!dinneVisible ? (
               <CiSquarePlus className="reveal-button" />
             ) : (
               <CiCircleMinus className="reveal-button" />
             )}
             <p className="reveal-button-text">
-              {lunchVisible ? "HIDE DINNER RECIPES" : "SHOW DINNER RECIPES"}
+              {dinneVisible ? "HIDE DINNER RECIPES" : "SHOW DINNER RECIPES"}
             </p>
           </div>
           <div
@@ -154,12 +178,11 @@ const Homepage = () => {
           >
             <div className="breakfast-content">
               <h2 className="all-recipes-header">Great recipes for DINNER:</h2>
-              <RecipeCarousel recipes={dinnerRecipes} />
+              <RecipeCarousel recipes={dinnerRecipes} popUp={handlePopUp} />
             </div>
           </div>
         </div>
       </div>
-      {/* ... (keep other recipe sections) */}
     </div>
   );
 };

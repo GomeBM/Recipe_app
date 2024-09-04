@@ -8,15 +8,6 @@ export const getUser = () => {
     if (tokenParts.length !== 3) return null;
 
     const payload = JSON.parse(atob(tokenParts[1]));
-
-    // // Check if the token has expired
-    // const currentTime = Math.floor(Date.now() / 1000); // Current time in seconds
-    // if (payload.exp && payload.exp < currentTime) {
-    //   // Token has expired
-    //   localStorage.removeItem("token"); // Remove the expired token
-    //   return null;
-    // }
-
     return {
       id: payload.userId,
       name: payload.userName,

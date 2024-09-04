@@ -79,6 +79,50 @@ router.post("/add-recipe", async (req, res) => {
   }
 });
 
+//ADDS RECIPE TO THE USER FAV_RECIPES LIST
+router.post("/add-to-favs", async (req, res) => {
+  const { userId, recipeId } = req.body;
+  console.log("Received add to wishlist request:", req.body);
+  try {
+    const user = await userModel.findOne({ _id: userId });
+    if (!user) {
+      console.log("User not found:", userId);
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const recipe = await recipeModel.findById(recipeId);
+    if (!recipe) {
+      console.log("Recipe not found:", recipeId);
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    const favListItemIndex = user.fav_recipes.findIndex(
+      (item) => item.recipe.toString() === recipeId
+    );
+
+    if (favListItemIndex === -1) {
+      // Add to favlist if not already there
+      user.fav_recipes.push({ recipe: recipeId });
+      console.log(`Added recipe ${recipeId} to wishlist for user ${userId}`);
+    }
+    // } else {
+    //   // Remove from wishlist if already there
+    //   user.fav_recipes.splice(favListItemIndex, 1);
+    //   console.log(
+    //     `Removed product ${recipeId} from wishlist for user ${userId}`
+    //   );
+    // }
+
+    await user.save();
+    res
+      .status(200)
+      .json({ message: "favlist updated", fav_recipes: user.fav_recipes });
+  } catch (error) {
+    console.error("Error updating wishlist:", error);
+    res.status(500).json({ message: error.message });
+  }
+});
+
 //GET CURRENT USERS MY_RECIPES ARRAY
 router.get("/my-recipes", async (req, res) => {
   const { userEmail } = req.body;

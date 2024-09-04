@@ -1,0 +1,8 @@
+.user-page-container {
+  color: white;
+  font-size: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5%;
+}
