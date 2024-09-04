@@ -4,17 +4,20 @@ import { CiSquarePlus, CiCircleMinus } from "react-icons/ci";
 import Popup from "../../components/Popup/Popup";
 import "./HomePage.css";
 import RecipeCarousel from "../../components/RecipeCarousel/RecipeCarousel";
+import FilterSection from "../../components/FilterSection/FilterSection";
 
 const Homepage = () => {
+  const [unfilteredRecipes, setUnfilteredRecipes] = useState([]); // New state to store unfiltered recipes
   const [allRecipes, setAllRecipes] = useState([]);
   const [breakfastRecipes, setBreakfastRecipes] = useState([]);
   const [lunchRecipes, setLunchRecipes] = useState([]);
   const [dinnerRecipes, setDinnerRecipes] = useState([]);
   const [connectedUserName, setConnectedUserName] = useState(null);
+  const [refresh, setRefresh] = useState(false); // New state for refresh
 
   const [breakfastVisible, setBreakfastVisible] = useState(false);
   const [lunchVisible, setLunchVisible] = useState(false);
-  const [dinneVisible, setDinnerVisible] = useState(false);
+  const [dinnerVisible, setDinnerVisible] = useState(false);
 
   const [showPopup, setShowPopup] = useState({
     show: false,
@@ -22,14 +25,12 @@ const Homepage = () => {
     recipeImage: null,
   });
 
-  const setIndividualRecipeLists = (allRecipes) => {
-    const breakfast = allRecipes.filter((recipe) =>
+  const setIndividualRecipeLists = (recipes) => {
+    const breakfast = recipes.filter((recipe) =>
       recipe.mealType.includes("Breakfast")
     );
-    const lunch = allRecipes.filter((recipe) =>
-      recipe.mealType.includes("Lunch")
-    );
-    const dinner = allRecipes.filter((recipe) =>
+    const lunch = recipes.filter((recipe) => recipe.mealType.includes("Lunch"));
+    const dinner = recipes.filter((recipe) =>
       recipe.mealType.includes("Dinner")
     );
 
@@ -44,6 +45,7 @@ const Homepage = () => {
         "http://localhost:4000/recipes/get-all-recipes"
       );
       const data = await response.json();
+      setUnfilteredRecipes(data.recipes); // Save the unfiltered list
       setAllRecipes(data.recipes);
       setIndividualRecipeLists(data.recipes);
     } catch (error) {
@@ -70,7 +72,6 @@ const Homepage = () => {
 
     checkUserStatus();
 
-    // Listen for token changes
     window.addEventListener("tokenChanged", checkUserStatus);
 
     return () => {
@@ -100,11 +101,26 @@ const Homepage = () => {
           }
         />
       )}
+
+      <FilterSection
+        allRecipes={allRecipes}
+        setAllRecipes={setAllRecipes}
+        setIndividualRecipeLists={setIndividualRecipeLists}
+        setRefresh={setRefresh} // Pass setRefresh to FilterSection
+        unfilteredRecipes={unfilteredRecipes} // Pass unfilteredRecipes to FilterSection
+      />
+
       <div className="all-recipes-container">
         <h2 className="all-recipes-header">All of our recipes:</h2>
-        <RecipeCarousel recipes={allRecipes} popUp={handlePopUp} />
+        <RecipeCarousel
+          key={`${allRecipes.length}-${refresh}`}
+          recipes={allRecipes}
+          popUp={handlePopUp}
+        />
       </div>
+
       <div className="reveal-lists-container">
+        {/* Breakfast Recipes */}
         <div className="reveal-breakfast-container">
           <div
             className="reveal-button-container"
@@ -130,11 +146,16 @@ const Homepage = () => {
               <h2 className="all-recipes-header">
                 Great recipes for BREAKFAST:
               </h2>
-              <RecipeCarousel recipes={breakfastRecipes} popUp={handlePopUp} />
+              <RecipeCarousel
+                key={`${breakfastRecipes.length}-${refresh}`}
+                recipes={breakfastRecipes}
+                popUp={handlePopUp}
+              />
             </div>
           </div>
         </div>
 
+        {/* Lunch Recipes */}
         <div className="reveal-breakfast-container">
           <div
             className="reveal-button-container"
@@ -154,31 +175,40 @@ const Homepage = () => {
           >
             <div className="breakfast-content">
               <h2 className="all-recipes-header">Great recipes for LUNCH:</h2>
-              <RecipeCarousel recipes={lunchRecipes} popUp={handlePopUp} />
+              <RecipeCarousel
+                key={`${lunchRecipes.length}-${refresh}`}
+                recipes={lunchRecipes}
+                popUp={handlePopUp}
+              />
             </div>
           </div>
         </div>
 
+        {/* Dinner Recipes */}
         <div className="reveal-breakfast-container">
           <div
             className="reveal-button-container"
-            onClick={() => setDinnerVisible(!dinneVisible)}
+            onClick={() => setDinnerVisible(!dinnerVisible)}
           >
-            {!dinneVisible ? (
+            {!dinnerVisible ? (
               <CiSquarePlus className="reveal-button" />
             ) : (
               <CiCircleMinus className="reveal-button" />
             )}
             <p className="reveal-button-text">
-              {dinneVisible ? "HIDE DINNER RECIPES" : "SHOW DINNER RECIPES"}
+              {dinnerVisible ? "HIDE DINNER RECIPES" : "SHOW DINNER RECIPES"}
             </p>
           </div>
           <div
-            className={`breakfast-container ${dinneVisible ? "visible" : ""}`}
+            className={`breakfast-container ${dinnerVisible ? "visible" : ""}`}
           >
             <div className="breakfast-content">
               <h2 className="all-recipes-header">Great recipes for DINNER:</h2>
-              <RecipeCarousel recipes={dinnerRecipes} popUp={handlePopUp} />
+              <RecipeCarousel
+                key={`${dinnerRecipes.length}-${refresh}`}
+                recipes={dinnerRecipes}
+                popUp={handlePopUp}
+              />
             </div>
           </div>
         </div>

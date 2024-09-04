@@ -1,0 +1,65 @@
+.filter-section-container {
+  width: 90%;
+  background: #403e3e;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.by-ingredients-container {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  width: fit-content;
+  align-items: flex-end;
+  padding: 10px;
+  color: white;
+  margin: 10px;
+  border-radius: 10px;
+  background: #ff8000;
+}
+
+.ingredient-input-container {
+  background: #403e3e;
+  padding: 5px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.ingredient-input {
+  border-radius: 5px;
+  margin-bottom: 4px;
+}
+
+.ingredient-label {
+  margin-right: 3px;
+}
+
+.by-ingredients-header {
+  color: #403e3e;
+  align-self: center;
+}
+
+.filter-button {
+  background: #403e3e;
+  margin: 5px;
+  border-radius: 10px;
+  height: fit-content;
+  padding: 5px;
+  color: white;
+}
+
+.filter-button:hover {
+  background: #303030;
+  border: 1px solid white;
+  transform: scale(1.1);
+}
+
+.by-ingredients-buttons-container {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  width: 100%;
+}
