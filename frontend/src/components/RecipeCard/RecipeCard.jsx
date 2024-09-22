@@ -20,9 +20,8 @@ const RecipeCard = ({ recipe, popUp }) => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      popUp(recipe);
-      // const data = await response.json();
-      // setRecipe(data.recipe);
+      const data = await response.json();
+      popUp(recipe, data.isAlreadyInFavs);
     } catch (error) {
       console.error("Error fetching recipe:", error);
     }

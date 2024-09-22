@@ -79,10 +79,12 @@ const Homepage = () => {
     };
   }, []);
 
-  const handlePopUp = (recipe) => {
+  const handlePopUp = (recipe, isAlreadyInFavs) => {
     setShowPopup({
       show: true,
-      message: `${recipe.name} has been added to your favourite list`,
+      message: isAlreadyInFavs
+        ? `${recipe.name} is already in your favorite list`
+        : `${recipe.name} has been added to your favorite list`,
       recipeImage: recipe.image,
     });
   };

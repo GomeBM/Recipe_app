@@ -93,30 +93,32 @@ router.post("/add-to-favs", async (req, res) => {
     const recipe = await recipeModel.findById(recipeId);
     if (!recipe) {
       console.log("Recipe not found:", recipeId);
-      return res.status(404).json({ message: "Product not found" });
+      return res.status(404).json({ message: "Recipe not found" });
     }
 
     const favListItemIndex = user.fav_recipes.findIndex(
       (item) => item.recipe.toString() === recipeId
     );
 
+    let isAlreadyInFavs = false;
+
     if (favListItemIndex === -1) {
       // Add to favlist if not already there
       user.fav_recipes.push({ recipe: recipeId });
       console.log(`Added recipe ${recipeId} to wishlist for user ${userId}`);
+    } else {
+      console.log(`${recipe.name} already in fav list for user : ${userId}`);
+      isAlreadyInFavs = true;
     }
-    // } else {
-    //   // Remove from wishlist if already there
-    //   user.fav_recipes.splice(favListItemIndex, 1);
-    //   console.log(
-    //     `Removed product ${recipeId} from wishlist for user ${userId}`
-    //   );
-    // }
 
     await user.save();
-    res
-      .status(200)
-      .json({ message: "favlist updated", fav_recipes: user.fav_recipes });
+    res.status(200).json({
+      message: isAlreadyInFavs
+        ? "Recipe already in favorites"
+        : "Favorites updated",
+      fav_recipes: user.fav_recipes,
+      isAlreadyInFavs: isAlreadyInFavs,
+    });
   } catch (error) {
     console.error("Error updating wishlist:", error);
     res.status(500).json({ message: error.message });

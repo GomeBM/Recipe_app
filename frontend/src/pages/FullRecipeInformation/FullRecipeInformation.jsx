@@ -16,7 +16,6 @@ const FullRecipeInformation = () => {
     message: "",
     recipeImage: null,
   });
-
   const handleAddToFavs = async () => {
     try {
       const user = getUser();
@@ -32,21 +31,24 @@ const FullRecipeInformation = () => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
+      const data = await response.json();
+
       setShowPopup({
         show: true,
-        message: `${recipe.name} has been added to your favourite list`,
+        message: data.isAlreadyInFavs
+          ? `${recipe.name} is already in your favorite list`
+          : `${recipe.name} has been added to your favorite list`,
         recipeImage: recipe.image,
       });
     } catch (error) {
-      console.error("Error fetching recipe:", error);
+      console.error("Error updating favorites:", error);
       setShowPopup({
         show: true,
-        message: `Please connect to your account in order to add ${recipe.name} to your favourite list `,
+        message: `Please connect to your account in order to add ${recipe.name} to your favorite list`,
         recipeImage: recipe.image,
       });
     }
   };
-
   useEffect(() => {
     const fetchRecipe = async () => {
       try {
