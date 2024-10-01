@@ -6,3 +6,20 @@
   align-items: center;
   padding: 5%;
 }
+
+.fav-recipes-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  text-align: center;
+}
+
+.fav-recipes-row {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(250px, 1fr)
+  ); /* Automatically adjusts the number of columns based on screen width */
+  gap: 40px;
+  width: 100%;
+}

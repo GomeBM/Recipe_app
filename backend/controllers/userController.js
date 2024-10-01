@@ -126,12 +126,10 @@ router.post("/add-to-favs", async (req, res) => {
 });
 
 //GET CURRENT USERS MY_RECIPES ARRAY
-router.get("/my-recipes", async (req, res) => {
-  const { userEmail } = req.body;
+router.post("/my-recipes", async (req, res) => {
+  const { _id } = req.body;
   try {
-    const user = await userModel
-      .findOne({ email: userEmail })
-      .populate("my_recipes.recipe");
+    const user = await userModel.findOne({ _id }).populate("my_recipes.recipe");
 
     if (!user) {
       return res.status(404).json({ error: "User not found" });
@@ -149,11 +147,11 @@ router.get("/my-recipes", async (req, res) => {
 });
 
 //GET CURRENT USERS FAV_RECIPES ARRAY
-router.get("/my-fav-recipes", async (req, res) => {
-  const { userEmail } = req.body;
+router.post("/my-fav-recipes", async (req, res) => {
+  const { _id } = req.body;
   try {
     const user = await userModel
-      .findOne({ email: userEmail })
+      .findOne({ _id })
       .populate("fav_recipes.recipe");
 
     if (!user) {
