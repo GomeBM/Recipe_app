@@ -59,7 +59,12 @@ const RecipeCarousel = ({ recipes, popUp }) => {
           customLeftArrow={<CustomLeftArrow />}
         >
           {recipes.map((recipe, index) => (
-            <RecipeCard key={index} recipe={recipe} popUp={popUp} />
+            <RecipeCard
+              key={index}
+              recipe={recipe}
+              popUp={popUp}
+              removeAble={false}
+            />
           ))}
         </Carousel>
       ) : (

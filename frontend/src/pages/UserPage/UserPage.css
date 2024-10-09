@@ -23,3 +23,42 @@
   gap: 40px;
   width: 100%;
 }
+
+.my-recipes-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  text-align: center;
+}
+
+.my-recipes-row {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(250px, 1fr)
+  ); /* Automatically adjusts the number of columns based on screen width */
+  gap: 40px;
+  width: 100%;
+}
+
+.reveal-button {
+  font-size: 48px;
+  color: #ff8000;
+  height: 100px;
+  width: auto;
+}
+
+.reveal-button-text {
+  margin-top: 5px;
+  font-size: 18px;
+  color: #ff8000;
+  margin-bottom: 10px;
+}
+
+.add-recipe-button-container {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

@@ -18,8 +18,12 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   width: 400px; /* Fixed width */
   max-height: 80vh;
-  overflow: auto; /* Add scroll if content exceeds height */
   text-align: center;
+}
+
+.popup p {
+  font-size: 20px;
+  color: white;
 }
 
 .popup-image {

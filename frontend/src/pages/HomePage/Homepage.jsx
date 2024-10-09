@@ -83,7 +83,7 @@ const Homepage = () => {
     setShowPopup({
       show: true,
       message: isAlreadyInFavs
-        ? `${recipe.name} is already in your favorite list`
+        ? `${recipe.name} has been removed from your favorite list`
         : `${recipe.name} has been added to your favorite list`,
       recipeImage: recipe.image,
     });
@@ -118,6 +118,7 @@ const Homepage = () => {
           key={`${allRecipes.length}-${refresh}`}
           recipes={allRecipes}
           popUp={handlePopUp}
+          removeAble={false}
         />
       </div>
 
@@ -152,6 +153,7 @@ const Homepage = () => {
                 key={`${breakfastRecipes.length}-${refresh}`}
                 recipes={breakfastRecipes}
                 popUp={handlePopUp}
+                removeAble={false}
               />
             </div>
           </div>
@@ -181,6 +183,7 @@ const Homepage = () => {
                 key={`${lunchRecipes.length}-${refresh}`}
                 recipes={lunchRecipes}
                 popUp={handlePopUp}
+                removeAble={false}
               />
             </div>
           </div>
@@ -210,6 +213,7 @@ const Homepage = () => {
                 key={`${dinnerRecipes.length}-${refresh}`}
                 recipes={dinnerRecipes}
                 popUp={handlePopUp}
+                removeAble={false}
               />
             </div>
           </div>

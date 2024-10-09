@@ -10,8 +10,8 @@ const router = express.Router();
 //ADDS RECIPE TO THE USER MY_RECIPES AND TO THE RECIPES DATA BASE
 router.post("/add-recipe", async (req, res) => {
   try {
-    const { userEmail } = req.body;
-    const user = await userModel.findOne({ email: userEmail });
+    const { userId } = req.body;
+    const user = await userModel.findOne({ _id: userId });
 
     // Ensure the user is found
     if (!user) {
@@ -107,7 +107,12 @@ router.post("/add-to-favs", async (req, res) => {
       user.fav_recipes.push({ recipe: recipeId });
       console.log(`Added recipe ${recipeId} to wishlist for user ${userId}`);
     } else {
-      console.log(`${recipe.name} already in fav list for user : ${userId}`);
+      // console.log(`${recipe.name} already in fav list for user : ${userId}`);
+      // isAlreadyInFavs = true;
+      user.fav_recipes.splice(favListItemIndex, 1);
+      console.log(
+        `Removed recipe ${recipeId} from fav list for user ${userId}`
+      );
       isAlreadyInFavs = true;
     }
 
