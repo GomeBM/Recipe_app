@@ -14,6 +14,7 @@ const Homepage = () => {
   const [dinnerRecipes, setDinnerRecipes] = useState([]);
   const [connectedUserName, setConnectedUserName] = useState(null);
   const [refresh, setRefresh] = useState(false); // New state for refresh
+  const [favorites, setFavorites] = useState([]); // New state for favorites
 
   const [breakfastVisible, setBreakfastVisible] = useState(false);
   const [lunchVisible, setLunchVisible] = useState(false);
@@ -39,15 +40,33 @@ const Homepage = () => {
     setDinnerRecipes(dinner);
   };
 
+  // Modified fetch function
   const fetchAllRecipesFromDB = async () => {
     try {
       const response = await fetch(
         "http://localhost:4000/recipes/get-all-recipes"
       );
       const data = await response.json();
-      setUnfilteredRecipes(data.recipes); // Save the unfiltered list
+      setUnfilteredRecipes(data.recipes);
       setAllRecipes(data.recipes);
       setIndividualRecipeLists(data.recipes);
+
+      // Fetch user favorites if the user is connected
+      const user = getUser();
+      if (user && user.id) {
+        const favoritesResponse = await fetch(
+          "http://localhost:4000/user/my-fav-recipes",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ _id: user.id }),
+          }
+        );
+        const favoritesData = await favoritesResponse.json();
+        setFavorites(favoritesData.fav_recipes); // Store favorites in state
+      }
     } catch (error) {
       console.error("Error fetching recipes:", error);
     }
@@ -119,6 +138,7 @@ const Homepage = () => {
           recipes={allRecipes}
           popUp={handlePopUp}
           removeAble={false}
+          favorites={favorites} // Pass favorites to RecipeCarousel
         />
       </div>
 
@@ -154,6 +174,7 @@ const Homepage = () => {
                 recipes={breakfastRecipes}
                 popUp={handlePopUp}
                 removeAble={false}
+                favorites={favorites} // Pass favorites to RecipeCarousel
               />
             </div>
           </div>
@@ -184,6 +205,7 @@ const Homepage = () => {
                 recipes={lunchRecipes}
                 popUp={handlePopUp}
                 removeAble={false}
+                favorites={favorites} // Pass favorites to RecipeCarousel
               />
             </div>
           </div>
@@ -214,6 +236,7 @@ const Homepage = () => {
                 recipes={dinnerRecipes}
                 popUp={handlePopUp}
                 removeAble={false}
+                favorites={favorites} // Pass favorites to RecipeCarousel
               />
             </div>
           </div>

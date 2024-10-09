@@ -89,7 +89,7 @@ export const AddRecipePage = () => {
   return (
     <div className="formContainer">
       <form onSubmit={handleSubmit}>
-        <h2>Add New Recipe</h2>
+        <h2>Please fill out the form to add a new recipe</h2>
 
         {error && <p className="error">{error}</p>}
         {success && <p className="success">{success}</p>}

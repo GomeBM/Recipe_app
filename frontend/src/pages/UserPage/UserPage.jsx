@@ -114,6 +114,7 @@ const UserPage = () => {
                 recipe={favRecipe.recipe}
                 popUp={handlePopUp}
                 removeAble={true}
+                favorites={favoriteRecipes}
               />
             ))}
           </div>

@@ -10,7 +10,8 @@
 
 h2 {
   text-align: center;
-  margin-bottom: 20px;
+  font-size: 30px;
+  margin-bottom: 40px;
   color: #333;
 }
 
@@ -22,6 +23,7 @@ label {
 label span {
   display: block;
   font-weight: bold;
+  font-size: 20px;
   margin-bottom: 5px;
   color: #555;
 }

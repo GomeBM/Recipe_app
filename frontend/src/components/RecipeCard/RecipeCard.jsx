@@ -3,42 +3,14 @@ import { Link } from "react-router-dom";
 import { getUser } from "../../UtilityFunctions";
 import "./RecipeCard.css";
 
-const RecipeCard = ({ recipe, popUp, removeAble, myOwn }) => {
+const RecipeCard = ({ recipe, popUp, removeAble, myOwn, favorites = [] }) => {
   const [isAlreadyInFavs, setIsAlreadyInFavs] = useState(false);
 
   useEffect(() => {
     // Check if the recipe is already in the user's favorites list
-    const checkIfInFavs = async () => {
-      try {
-        const user = getUser();
-        const response = await fetch(
-          "http://localhost:4000/user/my-fav-recipes",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ _id: user.id }),
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        const isFav = data.fav_recipes.some(
-          (fav) => fav.recipe._id === recipe._id
-        );
-
-        setIsAlreadyInFavs(isFav); // Update state based on whether the recipe is in the fav list
-      } catch (error) {
-        console.error("Error checking favorites:", error);
-      }
-    };
-
-    checkIfInFavs();
-  }, [recipe._id]);
+    const isFav = favorites.some((fav) => fav.recipe._id === recipe._id);
+    setIsAlreadyInFavs(isFav); // Update state based on whether the recipe is in the fav list
+  }, [recipe._id, favorites]); // Add favorites to dependency array
 
   const handleAddToFavs = async () => {
     try {

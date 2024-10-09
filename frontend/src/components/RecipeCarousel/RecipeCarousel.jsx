@@ -22,7 +22,7 @@ const CustomLeftArrow = ({ onClick }) => {
   );
 };
 
-const RecipeCarousel = ({ recipes, popUp }) => {
+const RecipeCarousel = ({ recipes, popUp, favorites }) => {
   const isMobile = useMediaQuery({ maxWidth: 600 });
 
   const responsive = {
@@ -64,6 +64,7 @@ const RecipeCarousel = ({ recipes, popUp }) => {
               recipe={recipe}
               popUp={popUp}
               removeAble={false}
+              favorites={favorites} // Pass favorites to RecipeCarousel
             />
           ))}
         </Carousel>
