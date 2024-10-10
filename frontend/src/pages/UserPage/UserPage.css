@@ -7,6 +7,12 @@
   padding: 5%;
 }
 
+.user-page-header {
+  text-align: center;
+  color: white;
+  font-size: 30px;
+}
+
 .fav-recipes-container {
   display: flex;
   flex-direction: column;
@@ -61,4 +67,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+@media screen and (max-width: 830px) {
+  .user-page-container {
+    margin-top: 30px;
+  }
 }

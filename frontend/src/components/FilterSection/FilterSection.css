@@ -5,29 +5,40 @@
   margin-bottom: 20px;
   border-radius: 10px;
   display: flex;
+  flex-direction: column;
   justify-content: flex-end;
   padding-right: 20px;
   padding-left: 20px;
 }
 
-.by-ingredients-container {
+.all-filterby-sections {
+  display: flex;
+  justify-content: space-around;
+}
+
+.by-ingredients-container,
+.by-cuisine-container {
   display: flex;
   flex-direction: column;
   align-self: center;
-  width: fit-content;
+  width: 250px;
   align-items: flex-end;
   padding: 10px;
   color: white;
   margin: 10px;
   border-radius: 10px;
   background: #ff8000;
+  min-height: 220px;
 }
 
-.ingredient-input-container {
+.ingredient-input-container,
+.cuisine-select-container {
   background: #403e3e;
   padding: 5px;
   border-radius: 5px;
   margin-bottom: 5px;
+  align-self: center;
+  width: 100%;
 }
 
 .ingredient-input {
@@ -39,9 +50,11 @@
   margin-right: 3px;
 }
 
-.by-ingredients-header {
+.by-ingredients-header,
+.by-cuisine-header {
   color: #403e3e;
   align-self: center;
+  font-size: 20px;
 }
 
 .filter-button {
@@ -57,11 +70,40 @@
   background: #303030;
   border: 1px solid white;
   transform: scale(1.1);
+  cursor: pointer;
 }
 
-.by-ingredients-buttons-container {
+.apply-filter-button,
+.remove-filter-button {
+  background: #ff8000;
+  margin: 5px;
+  border-radius: 10px;
+  height: fit-content;
+  width: 200px;
+  height: 40px;
+  padding: 5px;
+  color: white;
+  align-self: center;
+  font-size: 20px;
+}
+
+.apply-filter-button:hover,
+.remove-filter-button:hover {
+  background: #fb9e40;
+  border: 1px solid white;
+  cursor: pointer;
+}
+
+.by-ingredients-buttons-container,
+.by-cuisine-buttons-container {
   display: flex;
   flex-direction: column;
   align-self: center;
   width: 100%;
+}
+
+@media screen and (max-width: 830px) {
+  .all-filterby-sections {
+    flex-direction: column;
+  }
 }

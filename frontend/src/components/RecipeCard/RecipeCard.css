@@ -77,7 +77,7 @@
 }
 
 .recipe-card-button {
-  background: #403e3e;
+  background: #303030;
   margin: 10px;
   border-radius: 10px;
   height: fit-content;
@@ -86,8 +86,9 @@
 }
 
 .recipe-card-button:hover {
-  background: #303030;
+  background: #504e4e;
   border: 1px solid white;
+  cursor: pointer;
   transform: scale(1.1);
 }
 

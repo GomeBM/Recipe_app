@@ -115,4 +115,21 @@ router.post("/get-by-id", async (req, res) => {
   }
 });
 
+router.get("/get-cuisine-types", async (req, res) => {
+  try {
+    const eachCuisine = await recipeModel.distinct("nationality");
+    if (!eachCuisine) {
+      console.log(`No unique cuisines found`);
+      return res.status(404).json({
+        success: false,
+        message: `No unique cuisines found`,
+      });
+    }
+    res.status(200).json({ success: true, cuisines: eachCuisine });
+  } catch (error) {
+    console.log("Server error:", error.message);
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
+
 module.exports = router;

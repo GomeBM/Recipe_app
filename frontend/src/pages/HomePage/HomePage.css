@@ -27,7 +27,7 @@
 }
 
 .welcome-header {
-  font-size: 30px;
+  font-size: 40px;
   color: white;
 }
 
@@ -109,5 +109,9 @@
   .breakfast-container {
     margin-bottom: 50px;
     margin-top: 50px;
+  }
+
+  .home-page-container {
+    margin-top: 30px;
   }
 }

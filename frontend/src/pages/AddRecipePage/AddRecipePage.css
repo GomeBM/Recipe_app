@@ -20,6 +20,10 @@ label {
   margin-bottom: 15px;
 }
 
+.input {
+  margin-bottom: 10px;
+}
+
 label span {
   display: block;
   font-weight: bold;
@@ -97,4 +101,10 @@ textarea {
 .add-field-button:hover {
   cursor: pointer;
   background: #f7993b;
+}
+
+@media screen and (max-width: 830px) {
+  .formContainer {
+    max-width: 320px;
+  }
 }

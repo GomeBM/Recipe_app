@@ -80,7 +80,7 @@ const UserPage = () => {
 
   return (
     <div className="user-page-container">
-      <h1>{user.name}'s Page</h1>
+      <h1 className="user-page-header">{user.name}'s Page</h1>
       <div className="add-recipe-button-container">
         <p className="reveal-button-text">ADD A NEW RECIPE</p>
         <Link to={"/addRecipe"}>
@@ -88,7 +88,7 @@ const UserPage = () => {
         </Link>
       </div>
       <div className="my-recipes-container">
-        <h2>{user.name}'s Recipes:</h2>
+        <h2 className="user-page-header">{user.name}'s Recipes:</h2>
         {myRecipes.length > 0 ? (
           <div className="my-recipes-row">
             {myRecipes.map((myRecipe) => (
@@ -105,7 +105,7 @@ const UserPage = () => {
         )}
       </div>
       <div className="fav-recipes-container">
-        <h2>{user.name}'s Fav Recipes:</h2>
+        <h2 className="user-page-header">{user.name}'s Fav Recipes:</h2>
         {favoriteRecipes.length > 0 ? (
           <div className="fav-recipes-row">
             {favoriteRecipes.map((favRecipe) => (

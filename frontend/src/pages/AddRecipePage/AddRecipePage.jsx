@@ -109,6 +109,7 @@ export const AddRecipePage = () => {
           <span>Ingredients:</span>
           {recipe.ingredients.map((ingredient, index) => (
             <input
+              className="input"
               key={index}
               type="text"
               value={ingredient}
@@ -129,6 +130,7 @@ export const AddRecipePage = () => {
           <span>Instructions:</span>
           {recipe.instructions.map((instruction, index) => (
             <input
+              className="input"
               key={index}
               type="text"
               value={instruction}
@@ -197,6 +199,7 @@ export const AddRecipePage = () => {
           <span>Tags:</span>
           {recipe.tags.map((tag, index) => (
             <input
+              className="input"
               key={index}
               type="text"
               value={tag}
