@@ -17,7 +17,9 @@ const FilterSection = ({
     const fetchAllCuisines = async () => {
       try {
         const response = await fetch(
-          `${process.env.VITE_REACT_APP_BACKEND_BASEURL}/recipes/get-cuisine-types`
+          `${
+            import.meta.env.VITE_REACT_APP_BACKEND_BASEURL
+          }/recipes/get-cuisine-types`
         );
         const data = await response.json();
         setCuisines(data.cuisines);

@@ -15,13 +15,16 @@ const RecipeCard = ({ recipe, popUp, removeAble, myOwn, favorites = [] }) => {
   const handleAddToFavs = async () => {
     try {
       const user = getUser();
-      const response = await fetch("http://localhost:4000/user/add-to-favs", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ userId: user.id, recipeId: recipe._id }),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/user/add-to-favs`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ userId: user.id, recipeId: recipe._id }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);

@@ -19,13 +19,16 @@ const FullRecipeInformation = () => {
   const handleAddToFavs = async () => {
     try {
       const user = getUser();
-      const response = await fetch("http://localhost:4000/user/add-to-favs", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ userId: user.id, recipeId: recipe._id }),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/user/add-to-favs`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ userId: user.id, recipeId: recipe._id }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -53,7 +56,7 @@ const FullRecipeInformation = () => {
     const fetchRecipe = async () => {
       try {
         const response = await fetch(
-          "http://localhost:4000/recipes/get-by-id",
+          `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/recipes/get-by-id`,
           {
             method: "POST",
             headers: {

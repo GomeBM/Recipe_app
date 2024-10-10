@@ -20,7 +20,7 @@ const UserPage = () => {
   const fetchUserFavRecipes = async () => {
     try {
       const response = await fetch(
-        "http://localhost:4000/user/my-fav-recipes",
+        `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/user/my-fav-recipes`,
         {
           method: "POST",
           headers: {
@@ -42,13 +42,16 @@ const UserPage = () => {
   useEffect(() => {
     const fetchUsersRecipes = async () => {
       try {
-        const response = await fetch("http://localhost:4000/user/my-recipes", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ _id: id }),
-        });
+        const response = await fetch(
+          `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/user/my-recipes`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ _id: id }),
+          }
+        );
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }

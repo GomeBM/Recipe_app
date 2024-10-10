@@ -44,7 +44,9 @@ const Homepage = () => {
   const fetchAllRecipesFromDB = async () => {
     try {
       const response = await fetch(
-        "http://localhost:4000/recipes/get-all-recipes"
+        `${
+          import.meta.env.VITE_REACT_APP_BACKEND_BASEURL
+        }/recipes/get-all-recipes`
       );
       const data = await response.json();
       setUnfilteredRecipes(data.recipes);
@@ -55,7 +57,9 @@ const Homepage = () => {
       const user = getUser();
       if (user && user.id) {
         const favoritesResponse = await fetch(
-          "http://localhost:4000/user/my-fav-recipes",
+          `${
+            import.meta.env.VITE_REACT_APP_BACKEND_BASEURL
+          }/user/my-fav-recipes`,
           {
             method: "POST",
             headers: {
